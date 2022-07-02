@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header {
+  @apply font-bold text-16px mb-8px;
+}
+
+footer {
+}
+label {
+  @apply text-12px font-bold mb-8px;
+}
+
+input {
+  @apply p-10px border-[1px] border-gray-100 rounded-[8px];
+}
+
+button {
+  @apply px-16px py-8px rounded-[8px];
+}

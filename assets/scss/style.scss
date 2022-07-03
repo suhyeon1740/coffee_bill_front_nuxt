@@ -17,5 +17,13 @@ input {
 }
 
 button {
-  @apply px-16px py-8px rounded-[8px];
+  @apply px-16px py-8px rounded-[8px] text-12px;
+}
+
+.type-badge {
+  @apply w-[40px] py-[5px] text-center rounded-full text-white;
+}
+
+.number-badge {
+  @apply w-[25px] h-[25px] text-center leading-[25px] rounded-full bg-secondary-yellow;
 }

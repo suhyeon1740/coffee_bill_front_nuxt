@@ -33,8 +33,13 @@ export default {
   devServerHandlers: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // server setup
+  server: {
+    port: 4000,
+  },
 }

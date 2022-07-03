@@ -9,13 +9,14 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@nuxt/types", "@types/node"]
+    "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }

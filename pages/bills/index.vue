@@ -9,24 +9,14 @@
       </div>
       <div class="mt-8px">
         <h3 class="mb-4px font-medium">주문서 목록</h3>
-        <ul class="text-12px h-[170px] overflow-y-auto">
+        <ul class="text-12px h-[450px] md:h-[300px] overflow-y-auto">
           <li
+            v-for="(bill, index) in bills"
+            :key="index"
             class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer"
-            @click.stop="onClickBill"
+            @click.stop="onClickBill(bill.seq)"
           >
-            개발팀 커피타임
-          </li>
-          <li class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer">
-            디자인팀 커피타임
-          </li>
-          <li class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer">
-            사업팀 커피타임
-          </li>
-          <li class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer">
-            전체 커피타임
-          </li>
-          <li class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer">
-            전체 커피타임
+            {{ bill.name }}
           </li>
         </ul>
       </div>
@@ -35,20 +25,39 @@
 </template>
 
 <script lang="ts">
-import Component, { mixins } from 'vue-class-component'
+import { Component } from 'nuxt-property-decorator'
+import { mixins } from 'vue-class-component'
 import ApiComponent from '~/lib/ApiComponent.vue'
+import BillApi from '~/lib/api/bill/billApi'
+import { BaseBillVo } from '~/models/baseBillVo'
 
 @Component
 export default class Bills extends mixins(ApiComponent) {
-  private billSeq: number = 1
+  // TODO: priavate? public?
+  public bills: BaseBillVo[] = []
+
+  async created() {
+    await this.fetchBills()
+  }
+
+  async fetchBills() {
+    try {
+      const response = await BillApi.getBills(this.cancelToken)
+      this.bills = response.bills
+    } catch (e) {
+      alert(e)
+      console.error(e)
+    }
+  }
+
   async createBill() {
     await this.$router.push({ name: 'bills-create' })
   }
 
-  async onClickBill() {
+  async onClickBill(seq: number) {
     await this.$router.push({
       name: 'bills-seq-detail',
-      params: { seq: JSON.stringify(this.billSeq) },
+      params: { seq: JSON.stringify(seq) }
     })
   }
 }

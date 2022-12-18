@@ -1,7 +1,8 @@
 <template>
   <div class="bg-gray-100 h-[100vh] flex justify-center items-center">
+    <span class="text-[50px] absolute top-[30px] md:top-[50px] z-10">☕</span>
     <div
-      class="bg-white w-full max-w-[320px] h-[350px] rounded-[8px] drop-shadow p-30px flex"
+      class="bg-white w-full h-full md:max-w-[400px] md:h-[500px] rounded-[8px] drop-shadow px-30px pt-[120px] pb-[30px] md:pt-30px flex"
     >
       <Nuxt />
     </div>
@@ -10,7 +11,7 @@
 
 <script>
 export default {
-  name: 'DefaultLayout',
+  name: 'DefaultLayout'
 }
 </script>
 

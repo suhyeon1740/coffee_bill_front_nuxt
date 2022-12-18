@@ -18,7 +18,7 @@ export default {
   css: ['@/assets/scss/style.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '~/plugins/vee-validate', ssr: true }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -36,7 +36,10 @@ export default {
   modules: ['@nuxtjs/axios'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  // build를 설정안하면 ssr이 안되므로 반드시 해야한다.
+  build: {
+    transpile: ['vee-validate/dist/rules'],
+  },
 
   // server setup
   server: {

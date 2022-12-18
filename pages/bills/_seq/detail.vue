@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col flex-1">
-    <header>개발팀 커피 타임</header>
+    <header>{{ billInfo?.name }}</header>
+    <p class="sub-title">{{ billInfo?.description }}</p>
+    <list-button></list-button>
     <div class="body-container">
       <div class="text-right">
         <button class="bg-gray-300 text-white" @click.stop="finishBill">
@@ -11,42 +13,29 @@
         </button>
       </div>
       <div class="mt-8px">
-        <h3 class="mb-4px font-medium">총 <strong>8잔</strong></h3>
-        <ul class="text-12px h-[170px] overflow-y-auto">
+        <h3 class="mb-4px font-medium">
+          총 <strong>{{ orders?.length }}잔</strong>
+        </h3>
+        <ul class="text-12px h-[450px] md:h-[300px] overflow-y-auto">
           <li
-            class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer flex items-center"
+            v-for="(order, index) in orders"
+            :key="index"
+            class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer"
           >
-            <span class="flex-1">아메리카노</span>
-            <span class="type-badge bg-blue-500 mr-4px">ICE</span>
-            <span class="number-badge">5</span>
-          </li>
-          <li
-            class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer flex items-center"
-          >
-            <span class="flex-1">아메리카노</span>
-            <span class="type-badge bg-red-500 mr-4px">HOT</span>
-            <span class="number-badge">1</span>
-          </li>
-          <li
-            class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer flex items-center"
-          >
-            <span class="flex-1">바닐라 라떼</span>
-            <span class="type-badge bg-blue-500 mr-4px">ICE</span>
-            <span class="number-badge">2</span>
-          </li>
-          <li
-            class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer flex items-center"
-          >
-            <span class="flex-1">바닐라 라떼</span>
-            <span class="type-badge bg-blue-500 mr-4px">ICE</span>
-            <span class="number-badge">2</span>
-          </li>
-          <li
-            class="bg-gray-50 rounded-[8px] p-8px mb-4px cursor-pointer flex items-center"
-          >
-            <span class="flex-1">바닐라 라떼</span>
-            <span class="type-badge bg-blue-500 mr-4px">ICE</span>
-            <span class="number-badge">2</span>
+            <div class="flex items-center">
+              <span class="flex-1">{{ order.drinkName }}</span>
+              <span
+                class="type-badge mr-4px"
+                :class="[
+                  { 'bg-blue-500': order.drinkType === 1 },
+                  { 'bg-red-500': order.drinkType === 0 }
+                ]"
+                >{{ order.drinkTypeLabel }}</span
+              >
+            </div>
+            <div class="text-[10px] text-gray-500">
+              {{ order.optionDescription }}
+            </div>
           </li>
         </ul>
       </div>
@@ -56,12 +45,45 @@
 
 <script lang="ts">
 import Component, { mixins } from 'vue-class-component'
+import BillApi from '~/lib/api/bill/billApi'
+import OrderApi from '~/lib/api/order/orderApi'
 import ApiComponent from '~/lib/ApiComponent.vue'
+import { BaseBillVo, BaseOrderVo } from '~/models/baseBillVo'
 
 @Component
-export default class Bills extends mixins(ApiComponent) {
+export default class Detail extends mixins(ApiComponent) {
+  // billSeq
+  private billSeq: number = parseInt(this.$route.params.seq)
+
+  public billInfo?: BaseBillVo = {}
+  public orders?: BaseOrderVo[] = []
+
+  async created() {
+    await Promise.all([this.fetchBill(), this.fetchOrders()])
+  }
+
+  async fetchBill() {
+    try {
+      const response = await BillApi.getBill(this.billSeq, this.cancelToken)
+      this.billInfo = response
+    } catch (e) {
+      alert(e)
+      console.error(e)
+    }
+  }
+
+  async fetchOrders() {
+    try {
+      const response = await OrderApi.getOrders(this.billSeq, this.cancelToken)
+      this.orders = response.orders
+    } catch (e) {
+      alert(e)
+      console.error(e)
+    }
+  }
+
   addOrder() {
-    // TODO: addOrder 모달
+    // TODO: addOrder 모달 --> 새 페이지 이동
   }
 
   async finishBill() {

@@ -35,12 +35,20 @@ import AuthApi from '~/lib/api/auth/authApi'
 
 @Component
 export default class Login extends mixins(ApiComponent) {
-  private nickname: string = 'grace'
+  private nickname: string = 'yammy'
   private password: string = '0000'
 
   async onLogin() {
     try {
-      await AuthApi.login(this.nickname, this.password, this.cancelToken)
+      const response = await AuthApi.login(
+        this.nickname,
+        this.password,
+        this.cancelToken
+      )
+      const token = response.token
+
+      localStorage.setItem('token', token!)
+
       await this.$router.push({ name: 'bills' })
     } catch (e) {
       // console.error(e)

@@ -1,19 +1,19 @@
 // @ts-ignore
 import axios, { AxiosResponse, CancelTokenSource } from 'axios'
 
-// type RestConfiguration = {
-//   /** 억세스 토큰 */
-//   accessToken?: string
-//
-//   /** 클라이언트 아이디 */
-//   clientId?: string
-//
-//   /** 언어 */
-//   language?: string
-// }
+type RestConfiguration = {
+  /** 억세스 토큰 */
+  accessToken?: string
+  //
+  // /** 클라이언트 아이디 */
+  // clientId?: string
+  //
+  // /** 언어 */
+  // language?: string
+}
 
-// const RestConfig: RestConfiguration = {}
-// export { RestConfig }
+const RestConfig: RestConfiguration = {}
+export { RestConfig }
 
 /**
  * REST API URL 목록
@@ -21,8 +21,11 @@ import axios, { AxiosResponse, CancelTokenSource } from 'axios'
 export class RestUrl {
   private static readonly BASE_URL = process.env.REST_URL
 
-  // static readonly Login = `${RestUrl.BASE_URL}/auth/login`
-  static readonly Login = `http://127.0.0.1:3000/auth/login`
+  // static readonly Login = () => `${RestUrl.BASE_URL}/auth/login`
+  static readonly Login = () => `http://127.0.0.1:3000/auth/login`
+  static readonly Bills = () => `http://127.0.0.1:3000/bills`
+  static readonly Bill = (billSeq: number) => `http://127.0.0.1:3000/bills/${billSeq}`
+  static readonly Orders = (billSeq: number) => `http://127.0.0.1:3000/bills/${billSeq}/orders`
 }
 
 export class Rest {
@@ -92,9 +95,12 @@ export class Rest {
     // const clientId = isServer ? RestConfig.clientId : Storage.get(StorageKey.ClientId)
 
     // const accessToken = '4ezzBi4o2Yn3vQvVqaihTD6cONE='
-    // if (accessToken) {
-    //   // @ts-ignore
-    //   config.headers['Access-Token'] = accessToken
+    // if (process.client) {
+    //   const accessToken = localStorage.getItem('token')
+    //   if (accessToken) {
+    //     // @ts-ignore
+    //     config.headers['Access-Token'] = accessToken
+    //   }
     // }
 
     return config

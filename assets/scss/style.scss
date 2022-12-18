@@ -6,6 +6,10 @@ header {
   @apply font-bold text-16px mb-8px;
 }
 
+.sub-title {
+  @apply text-12px;
+}
+
 footer {
 }
 label {
@@ -13,7 +17,7 @@ label {
 }
 
 input {
-  @apply p-10px border-[1px] border-gray-100 rounded-[8px];
+  @apply py-4px px-10px border-[1px] border-gray-100 rounded-[8px];
 }
 
 button {
@@ -26,4 +30,22 @@ button {
 
 .number-badge {
   @apply w-[25px] h-[25px] text-center leading-[25px] rounded-full bg-secondary-yellow;
+}
+
+
+/* Dialog Common */
+
+.dialog-wrapper {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.dialog-container {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
 }

@@ -23,7 +23,9 @@
       <button class="bg-primary text-white" @click.stop="onLogin">
         로그인
       </button>
-      <button class="bg-white text-primary border-0">회원가입</button>
+      <router-link class="bg-white text-primary border-0" to="signup"
+        >회원가입</router-link
+      >
     </footer>
   </div>
 </template>

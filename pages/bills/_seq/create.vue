@@ -2,11 +2,16 @@
   <div class="flex flex-col flex-1">
     <header>음료 추가하기</header>
     <p class="sub-title">주문서명 : 개발팀 커피 타임</p>
-
+    <list-button></list-button>
     <div class="body-container">
-      <div class="mt-8px">
-        <input v-model="keyword" type="text" @keyup.enter="onSearch" />
-        <button class="bg-primary text-white" @click.stop="onSearch">
+      <div class="flex mt-8px">
+        <input
+          v-model="keyword"
+          class="flex-1"
+          type="text"
+          @keyup.enter="onSearch"
+        />
+        <button class="bg-primary text-white ml-8px" @click.stop="onSearch">
           검색
         </button>
       </div>

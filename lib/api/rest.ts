@@ -1,5 +1,7 @@
 // @ts-ignore
 import axios, { AxiosResponse, CancelTokenSource } from 'axios'
+// const BaseUrl = process.env.REST_AWS_URL
+const BaseUrl = process.env.REST_URL  // 로컬
 
 type RestConfiguration = {
   /** 억세스 토큰 */
@@ -19,13 +21,15 @@ export { RestConfig }
  * REST API URL 목록
  */
 export class RestUrl {
-  private static readonly BASE_URL = process.env.REST_URL
+  // private static readonly BASE_URL = process.env.REST_URL
+  private readonly BaseUrl = process.env.REST_AWS_URL
 
   // static readonly Login = () => `${RestUrl.BASE_URL}/auth/login`
-  static readonly Login = () => `http://127.0.0.1:3000/auth/login`
-  static readonly Bills = () => `http://127.0.0.1:3000/bills`
-  static readonly Bill = (billSeq: number) => `http://127.0.0.1:3000/bills/${billSeq}`
-  static readonly Orders = (billSeq: number) => `http://127.0.0.1:3000/bills/${billSeq}/orders`
+  static readonly Login = () => `${BaseUrl}/auth/login`
+  static readonly Signup = () => `${BaseUrl}/auth/signup`
+  static readonly Bills = () => `${BaseUrl}/bills`
+  static readonly Bill = (billSeq: number) => `${BaseUrl}/bills/${billSeq}`
+  static readonly Orders = (billSeq: number) => `${BaseUrl}/bills/${billSeq}/orders`
 }
 
 export class Rest {

@@ -45,7 +45,7 @@ export default class Bills extends mixins(ApiComponent) {
       const response = await BillApi.getBills(this.cancelToken)
       this.bills = response.bills
     } catch (e) {
-      alert(e)
+      // alert(e)
       console.error(e)
     }
   }

@@ -67,7 +67,7 @@ export default class Detail extends mixins(ApiComponent) {
       const response = await BillApi.getBill(this.billSeq, this.cancelToken)
       this.billInfo = response
     } catch (e) {
-      alert(e)
+      // alert(e)
       console.error(e)
     }
   }
@@ -77,13 +77,14 @@ export default class Detail extends mixins(ApiComponent) {
       const response = await OrderApi.getOrders(this.billSeq, this.cancelToken)
       this.orders = response.orders
     } catch (e) {
-      alert(e)
+      // alert(e)
       console.error(e)
     }
   }
 
   addOrder() {
     // TODO: addOrder 모달 --> 새 페이지 이동
+    this.$router.push({ name: 'bills-seq-create' })
   }
 
   async finishBill() {

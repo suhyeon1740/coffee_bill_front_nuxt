@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col flex-1">
-    <header>로그인 테스트 코드</header>
+    <header>로그인</header>
     <div class="body-container flex-1">
       <div class="flex flex-col mb-16px">
         <label>닉네임</label>

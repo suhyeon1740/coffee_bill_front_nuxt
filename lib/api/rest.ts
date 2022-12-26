@@ -1,7 +1,7 @@
 // @ts-ignore
 import axios, { AxiosResponse, CancelTokenSource } from 'axios'
-// const BaseUrl = process.env.REST_AWS_URL
-const BaseUrl = process.env.REST_URL  // 로컬
+const BaseUrl = process.env.NUXT_ENV_REST_AWS_URL
+// const BaseUrl = process.env.NUXT_ENV_REST_URL  // 로컬
 
 type RestConfiguration = {
   /** 억세스 토큰 */

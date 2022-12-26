@@ -25,6 +25,8 @@ jobs:
 
       - name: Generate
         run: yarn generate
+        env:
+          REST_AWS_URL: ${{ secrets.REST_AWS_URL }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

@@ -21,9 +21,6 @@ export { RestConfig }
  * REST API URL 목록
  */
 export class RestUrl {
-  // private static readonly BASE_URL = process.env.REST_URL
-  private readonly BaseUrl = process.env.REST_AWS_URL
-
   // static readonly Login = () => `${RestUrl.BASE_URL}/auth/login`
   static readonly Login = () => `${BaseUrl}/auth/login`
   static readonly Signup = () => `${BaseUrl}/auth/signup`

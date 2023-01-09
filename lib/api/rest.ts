@@ -1,6 +1,7 @@
 // @ts-ignore
 import axios, { AxiosResponse, CancelTokenSource } from 'axios'
 const BaseUrl = process.env.NUXT_ENV_REST_AWS_URL
+console.log('BaseUrl process.env.NUXT_ENV_REST_AWS_URL', process.env.NUXT_ENV_REST_AWS_URL)
 // const BaseUrl = process.env.NUXT_ENV_REST_URL  // 로컬
 
 type RestConfiguration = {
